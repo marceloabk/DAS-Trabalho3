@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "removeComments": true,
+    "noImplicitAny": false,
+    "outDir": "dist"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

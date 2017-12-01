@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: /bin/bash -l -c "npm run build && npm run dev"
+    tty: true
+    restart: always
+    volumes:
+      - $PWD/src:$PWD
+      - /usr/DCrawler/node_modules/
