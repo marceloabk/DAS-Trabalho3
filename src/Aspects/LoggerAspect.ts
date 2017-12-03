@@ -3,7 +3,7 @@ import {beforeMethod, onThrowOfMethod, Metadata} from 'aspect.js';
 class LoggerAspect {
     @beforeMethod({
         classNamePattern: /^Crawler/,
-        methodNamePattern: /^(get|set)/
+        methodNamePattern: /[\s\S]*/
     })
     invokeBeforeMethod(meta: Metadata){
         console.log(`[LOGGER] Called ${meta.className}.${meta.method.name} with args: ${meta.method.args.join(', ')}.`);
@@ -11,9 +11,9 @@ class LoggerAspect {
 
     @onThrowOfMethod({
         classNamePattern: /^Crawler/,
-        methodNamePattern: /^(get|set)/
+        methodNamePattern: /[\s\S]*/
     })
     invokeThrowMethod(meta) {
-        console.log(`[LOGGER] Exeption on method ${meta.method.name} with args: ${meta.method.args.join(', ')}.`);
+        console.log(`[LOGGER] Exeption on ${meta.method.name} with args: ${meta.method.args.join(', ')}.`);
     }
 }
