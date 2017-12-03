@@ -1,15 +1,17 @@
 import Crawler from './Models/Crawler'
 
-function during(content) {
-    console.log(content.body)
+function before () {
+    console.log('[BEFORE]');
+    return 'beore err';
 }
 
-function before() {
-    console.log("verificando banco de dados")
+function during (err, res) {
+    console.log(`[DURING] ${res.requestUrl} and ${err}`);
+    return 'during err';
 }
 
-function after(content) {
-    console.log('Inserindo no banco: ', content.requestUrl)
+function after (err, res) {
+    console.log(`[AFTER] ${res.requestUrl} and ${err}`);
 }
 
 new Crawler('https://www.google.com.br', during, before, after);

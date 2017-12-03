@@ -6,7 +6,7 @@ class LoggerAspect {
         methodNamePattern: /[\s\S]*/
     })
     invokeBeforeMethod(meta: Metadata){
-        console.log(`[LOGGER] Called ${meta.className}.${meta.method.name} with args: ${meta.method.args.join(', ')}.`);
+        console.log(`[LOGGER] Called ${meta.className}.${meta.method.name}`);
     }
 
     @onThrowOfMethod({
