@@ -1,17 +1,29 @@
 import Crawler from './Models/Crawler'
 
-function before () {
-    console.log('[BEFORE]');
-    return 'beore err';
+function before(result) {
+    console.log(`[BEFORE]`);
+    result.beforeErr = 'BeforeError';
+
+    return result
 }
 
-function during (err, res) {
-    console.log(`[DURING] ${res.requestUrl} and ${err}`);
-    return 'during err';
+function during(result) {
+    console.log(`[DURING]`);
+    console.log(result.beforeErr);
+    console.log(result.res.requestUrl);
+
+    result.duringErr = 'DuringError';
+    result.res.requestUrl = 'lolol';
+
+    return result;
 }
 
-function after (err, res) {
-    console.log(`[AFTER] ${res.requestUrl} and ${err}`);
+function after(result) {
+    console.log(`[AFTER]`);
+    console.log(result.duringErr);
+    console.log(result.res.requestUrl);
+
+    return result;
 }
 
-new Crawler('https://www.google.com.br', during, before, after);
+new Crawler('https://www.google.com', during, before, after);

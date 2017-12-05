@@ -1,41 +1,41 @@
-import '../Aspects/LoggerAspect';
-import {Wove} from 'aspect.js';
+import CrawlerResult from "./CrawlerResult";
 import * as got from 'got';
 
-@Wove()
+
 export default class Crawler {
-    constructor(url, duringFunction = undefined, beforeFunction = undefined, afterFunction = undefined) {
-        this.templateCrawler(url, duringFunction, beforeFunction, afterFunction);
+    private result: CrawlerResult = new CrawlerResult();
+    private url: string;
+
+    constructor(url: string, during, before = undefined, after = undefined) {
+        this.url = url;
+        this.templateMethod(during, before, after)
     }
 
-    templateCrawler(url, duringFunction, beforeFunction, afterFunction) {
-        let beforeErr = null;
-
-        if (beforeFunction) {
-            beforeErr = beforeFunction();
+    templateMethod(during, before, after) {
+        if (before) {
+            this.result = before(this.result);
         }
 
-        const crawlerExection = this.execCrawler(beforeErr, url, duringFunction);
+        this.execCrawler().then((res) => {
+            this.result.res = res;
+            this.result = during(this.result);
 
-        if (afterFunction) {
-            crawlerExection.then(x => afterFunction(x.err, x.response));
-        }
-    }
-
-
-    async execCrawler(beforeErr, url, callback) {
-        let response = undefined;
-        let duringErr = null;
-        try {
-            response = await got(url);
-            if (callback) {
-                duringErr = callback(beforeErr, response)
+            return this.result;
+        }).then((res) => {
+            if (after) {
+                this.result = after(this.result)
             }
+        });
+    }
 
-        } catch (error) {
-            console.log(error.response.body);
+    async execCrawler() {
+        let res = undefined;
+        try {
+            res = await got(this.url);
+        } catch (err) {
+            console.log(err);
         }
 
-        return {err: duringErr, response: response};
+        return res;
     }
 }
