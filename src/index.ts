@@ -1,4 +1,6 @@
 import Crawler from './Models/Crawler'
+import {DuringStrategy, PrintStrategy, JsonStrategy} from './Models/DuringStrategy'
+
 
 function before(result) {
     console.log(`[BEFORE]`);
@@ -9,21 +11,20 @@ function before(result) {
 
 function during(result) {
     console.log(`[DURING]`);
-    console.log(result.beforeErr);
-    console.log(result.res.requestUrl);
+    let strategy = new DuringStrategy(new JsonStrategy());
 
-    result.duringErr = 'DuringError';
-    result.res.requestUrl = 'lolol';
+    result = strategy.exec(result);
 
     return result;
 }
 
 function after(result) {
     console.log(`[AFTER]`);
-    console.log(result.duringErr);
-    console.log(result.res.requestUrl);
+    console.log(result.res);
 
     return result;
 }
+
+
 
 new Crawler('https://www.google.com', during, before, after);

@@ -23,13 +23,14 @@ export default class Crawler {
             return this.result;
         }).then((res) => {
             if (after) {
-                this.result = after(this.result)
+                this.result = after(res)
             }
         });
     }
 
     async execCrawler() {
         let res = undefined;
+
         try {
             res = await got(this.url);
         } catch (err) {
