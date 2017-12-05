@@ -6,8 +6,7 @@ interface DuringStrategyInterface {
 
 class printStrategy implements DuringStrategyInterface {
     exec(err, content) {
-
-
+        return new CrawlerResult()
     }
 }
 
