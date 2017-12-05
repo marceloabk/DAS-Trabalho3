@@ -25,6 +25,4 @@ function after(result) {
     return result;
 }
 
-
-
 new Crawler('https://www.google.com', during, before, after);

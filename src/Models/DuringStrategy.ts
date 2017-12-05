@@ -1,3 +1,5 @@
+import '../Aspects/LoggerAspect'
+import {beforeMethod, onThrowOfMethod, Metadata, Wove} from 'aspect.js';
 import CrawlerResult from "./CrawlerResult";
 import {parse} from 'himalaya';
 
@@ -21,6 +23,7 @@ export class JsonStrategy implements DuringStrategyInterface {
     }
 }
 
+@Wove()
 export class DuringStrategy {
     private _strategy: DuringStrategyInterface;
 

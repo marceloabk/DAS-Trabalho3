@@ -1,7 +1,9 @@
+import '../Aspects/LoggerAspect'
+import {Wove} from 'aspect.js';
 import CrawlerResult from "./CrawlerResult";
 import * as got from 'got';
 
-
+@Wove()
 export default class Crawler {
     private result: CrawlerResult = new CrawlerResult();
     private url: string;
