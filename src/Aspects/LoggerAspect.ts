@@ -13,7 +13,7 @@ class LoggerAspect {
         classNamePattern: /[\s\S]*/,
         methodNamePattern: /[\s\S]*/
     })
-    invokeThrowMethod(meta) {
+    invokeThrowMethod(meta: Metadata) {
         console.log(`\t[LOGGER][ERROR] Exeption on ${meta.method.name} with args: ${meta.method.args.join(', ')}.`);
     }
 }

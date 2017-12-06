@@ -13,7 +13,7 @@ export default class Crawler {
         this.templateMethod(during, before, after)
     }
 
-    templateMethod(during, before, after) {
+    private templateMethod(during, before, after) {
         if (before) {
             this.result = before(this.result);
         }
@@ -30,7 +30,7 @@ export default class Crawler {
         });
     }
 
-    async execCrawler() {
+    private async execCrawler() {
         let res = undefined;
 
         try {
