@@ -8,10 +8,10 @@ O modulo crawler tem um construtor com dois parâmetros obrigatórios e dois opc
 
     constructor(url: string, during, before = undefined, after = undefined)
     
-url: endereço eletrônico a ser crawleado.
-during: função que será executada junto do crawler.
-before: função que será executado antes do crawler.
-after: função que será executada depois do crawler.
+- url: endereço eletrônico a ser crawleado.
+- during: função que será executada junto do crawler.
+- before: função que será executado antes do crawler.
+- after: função que será executada depois do crawler.
 
 Toda função que é passada para o crawler recebe e retorna um CrawlerResult e é assim que as funções se comunicam.
 
@@ -24,6 +24,7 @@ class CrawlerResult {
 }
 `````
 
+## Exemplo de uso
 
 ````typescript
 import Crawler from './Models/Crawler'
