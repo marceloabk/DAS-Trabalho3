@@ -10,19 +10,20 @@ function before(result) {
 }
 
 function during(result) {
-    console.log(`[DURING]`);
-    let strategy = new DuringStrategy(new JsonStrategy());
+    console.log(`[DURING] ${result.beforeErr}`);
+    result.duringErr = 'DuringError';
 
+    let strategy = new DuringStrategy(new JsonStrategy());
     result = strategy.exec(result);
 
     return result;
 }
 
 function after(result) {
-    console.log(`[AFTER]`);
+    console.log(`[AFTER] ${result.beforeErr} ${result.duringErr}`);
     console.log(result.res);
 
     return result;
 }
 
-new Crawler('https://www.google.com', during, before, after);
+new Crawler('http://www.engenhandosoftware.com.br', during, before, after);
